@@ -241,11 +241,11 @@ output$q32ans <- shiny::renderTable(
 1.  Print this page to PDF and save the file as _**sta490-multiverse-analysis.pdf**_. You can click the button below to open up the printer dialogue for your browser. See [here](https://www.digitaltrends.com/computing/how-to-save-a-webpage-as-a-pdf/) if you are not familiar with printing a web page to a PDF file from a browser. 
 2.  Submit the pdf to Quercus. Please do **NOT** include your name in the file name or in the answers.
 
-#### Note
+#### Notes
 
 +  The PDF file will not include the code outputs or the input areas including code, text, and number input areas. Make sure to type in and confirm your answers for each question. 
 +  You will be graded based on completion of all questions and quality of discussions in Question 3. 
-+  Scores for Question 1 and Question 2 will be used for the purpose of the `mverse` R package evaulation only.
++  Scores for Question 1 and Question 2 will be used for the purpose of the `mverse` R package evaluation only.
 
 ```{r submitbutton}
 shiny::actionButton(
