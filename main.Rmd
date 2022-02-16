@@ -13,9 +13,11 @@ runtime: shiny_prerendered
 library(learnr)
 library(tidyverse)
 library(ggplot2)
-install.packages("ggtext", quiet = TRUE)
+install.packages(
+  "ggtext", quiet = TRUE, repos = "https://cloud.r-project.org")
 remotes::install_github(
-  "mverseanalysis/mverse", ref = "release", upgrade = "always", quiet = TRUE)
+  "mverseanalysis/mverse", ref = "release", 
+  upgrade = "always", quiet = TRUE, repos = "https://cloud.r-project.org")
 knitr::opts_chunk$set(echo = FALSE)
 soccer <- read.csv("https://raw.githubusercontent.com/mjmoon/sta490-soccer/main/data/soccer.csv")
 ```
