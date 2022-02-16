@@ -24,13 +24,13 @@ remotes::install_github(
   "mverseanalysis/mverse", ref = "release", 
   upgrade = "never", quiet = TRUE, repos = "http://cran.us.r-project.org")
 knitr::opts_chunk$set(echo = FALSE)
-# soccer <- read.csv("https://raw.githubusercontent.com/mjmoon/sta490-soccer/main/data/soccer.csv")
+soccer <- read.csv("https://raw.githubusercontent.com/mjmoon/sta490-soccer/main/data/soccer.csv")
 ```
 
 ```{r child='00-introduction.Rmd'}
 ```
 
-```{r child='01-overview.Rmd'}
+```{r child='01-overview.Rmd', eval=FALSE}
 ```
 
 ```{r child='02-logistic-regression.Rmd', eval=FALSE}
