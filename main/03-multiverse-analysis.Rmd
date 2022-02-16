@@ -22,16 +22,16 @@ ggplot(tmp, aes(y = position, x =redCards / games, colour = position_group)) +
   theme_minimal() +
   geom_violin(alpha = 0.25, show.legend = FALSE) +
   geom_point(aes(x = medianp), data = tmp_group, size = 2, shape = 15, show.legend = FALSE) +
-  geom_text(aes(x = 0.07, label = paste0(position, " (n=", format(n, big.mark = ",") , ")")),
-    size = 3, hjust = 1, vjust = 0, nudge_y = 0.1, nudge_x =- 0.001, show.legend = FALSE,
+  geom_text(aes(x = 0.04, label = paste0(position, " (n=", format(n, big.mark = ",") , ")")),
+    size = 3, hjust = 1, vjust = 0.5, nudge_y = 0, nudge_x =- 0.001, show.legend = FALSE,
     data = tmp_group) +
-  scale_x_continuous(position = "top", limits = c(0, 0.07)) +
+  scale_x_continuous(position = "top", limits = c(0, 0.04)) +
   scale_colour_brewer(palette = "Set2") +
   facet_grid("position_group", scales = "free_y", space = "free_y", switch = "y",
              labeller = as_labeller(~ paste0('<span style="color:',
              RColorBrewer::brewer.pal(4, "Set2")[1:4], ';">',.x, '</span>'))) +
   labs(y = NULL, x = "Proportion of red card received per match", 
-       caption = stringr::str_wrap("Figure 1. The violin plots display the distributions of each player's proportion of red cards received in a game and the squares indicate the median value for each position. They suggest that the likelihood of receiving a red card in a soccer match vary by position.", width = 90)) +
+       caption = stringr::str_wrap("Figure 1. The violin plots display the distributions of each player's proportion of red cards received in a game and the squares indicate the median value for each position. They suggest that the likelihood of receiving a red card in a soccer match may vary by position.", width = 90)) +
   theme(axis.text.y = element_blank(),
         axis.title.x.top = element_text(color = "#555555", size = 8),
         axis.text.x.top = element_text(color = "#555555", size = 8),
@@ -43,7 +43,7 @@ ggplot(tmp, aes(y = position, x =redCards / games, colour = position_group)) +
 
 Note that the data set provides _typical position_ each player played _as of June 2014_ when Silberzahn et al. (2018) collected them. However, the red card and game counts may represent an accumulation over multiple years depending on the player's career. During these years, a player may have played multiple positions. This leads to a disconnect between the position information and the red cards on record. For example, a center back as of June 2014 may have received a red card while playing as a right full back. 
 
-To address the issue, one may consider grouping the positions assuming that most players do not switch between the groupings over their careers. Figure 1 shows a common grouping of the positions<sup>3</sup>. We may also consider grouping all positions on the field and only keep _Goalkeeper_ as a separate position. Or, we may even decide not to use the position information deeming the information as unreliable. 
+To address the issue, one may consider grouping the positions assuming that most players do not switch between the groupings over their careers. Figure 1 shows a common grouping of the positions<sup>3</sup>. We may also consider grouping all positions on the field and only keep goalkeeper as a separate position. Or, we may even decide not to use the position information at all deeming the information as unreliable. 
 
 We can argue that all four options below provide _defensible_ analysis paths.
 
@@ -148,7 +148,17 @@ filter(est, term == 'skintone') %>%
   select(universe, estimate, conf.low, conf.high, new_position_branch, model_branch)
 ```
 
-From the table above, we observe that the results are consistent in direction and statistical significance at 95% confidence level across the multiverse of analysis paths. The results indicate that players with very dark skin tones suffer approximately 40~45% (Odd ratio 95% CIs ranging approximately within [1.05, 1.90]) higher odds of getting a red card during match compared to their colleagues with very light skin tones. 
+```{r mverse-tut-glm-res}
+res <- filter(est, term == 'skintone') %>% 
+  mutate(
+    conf.low = exp(estimate + qnorm(.025) * std.error),
+    conf.high = exp(estimate + qnorm(.975) * std.error),
+    estimate = exp(estimate)
+  ) %>%
+  select(universe, estimate, conf.low, conf.high, new_position_branch, model_branch)
+```
+
+From the table above, we observe that the results are consistent in direction and statistical significance at 95% confidence level across the multiverse of analysis paths. The results indicate that players with very dark skin tones suffer approximately `r sprintf("%.1f%%", min(res$estimate) * 100 - 100)`~`r sprintf("%.1f%%", max(res$estimate) * 100 - 100)` (Odd ratio 95% CIs ranging approximately within [`r sprintf("%.2f", min(res$conf.low))`, `r sprintf("%.2f", max(res$conf.high))`]) higher odds of getting a red card during match compared to their colleagues with very light skin tones. 
 
 ```{=html}
 <hr />

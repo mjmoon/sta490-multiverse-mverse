@@ -16,7 +16,7 @@ __A1.__ not including the position variable;
 __A2.__ grouping positions into fielders vs. goal keepers;  
 __A3.__ grouping positions into 4 groups of forwards vs. midfielders vs. defenders vs. goal keepers; and  
 __A4.__ including the position variable as is.
-B.  League country<sup><a href="#note5">5</a></sup> (`leagueCountry`): The data set includes players playing in different leagues from four countries. It is reasonable to believe that the variable is a confounder as a league may tend to give out more red cards and have more players with darker skin tones. On the other hand, some argue that the variable is unreliable because players move between the leagues and the data set doesn't capture the movements. Consider the following options:  
+B.  League country<sup><a href="#note5">5</a></sup> (`leagueCountry`): The data set includes players playing in English and German leagues. It is possible that the variable is a confounder as a league may tend to give out more red cards and have more or less players with darker skin tones. On the other hand, some argue that the variable is unreliable because players move between the leagues and the data set doesn't capture the movements. Consider the following options:  
 __B1.__ not including the league country variable; and  
 __B2.__ using the league country variable.
 C.  Player size<sup><a href="#note5">5</a></sup> (`height` or `weight`): Players that are larger may be more willing to engage in physical contacts with other players due to their physical advantage. This may lead to more red cards to larger players. You can control for a player's size using either their height or weight. Consider the options of:  

@@ -56,4 +56,4 @@ res
 
 From the estimated odds above, we may conclude that soccer players with darker skin tone tend to receive more red cards based. The odd of a player with _very dark skin (mean skin tone rating = 1)_ getting a red card during a soccer match is `r round(res[[2,2]], 3)` (95% CI of [`r round(res[[2, 6]], 3)`, `r round(res[[2,7]], 3)`]) times higher compared to that of a player with _very light skin (mean skin tone rating = 0)_.
 
-In this demonstration, we omitted considerations for any covariates. In the following section, we demonstrate a multiverse analysis with an example for incorporating a covariate.
+In this demonstration, we did not consider any covariates. In the following section, we demonstrate a multiverse analysis example with multiple options for incorporating a covariate.
