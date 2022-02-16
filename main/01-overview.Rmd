@@ -7,7 +7,7 @@ We hypothesize that soccer players with darker skin tone would receive more red 
 
 ### Data
 
-To test the hypothesis, Silberzahn et al. (2018)  collected data on all soccer players who played in the first male divisions of England, Germany, France, and Spain in the 2012-2013 season plus data on their interaction with all referees across their professional careers. The collected data contains multiple seasons for most players. They also collected ratings on the darkness of the skin tones from two independent raters that provided ratings based on available photos. The full data set is available on their project page at https://osf.io/gvm2z/. Silberzahn et al. (2018)  collected the data in June 2014. For the scope of this exercise, we prepared a subset of the data with the following variables<sup><a href="#note2">2</a></sup>. 
+To test the hypothesis, Silberzahn et al. (2018)  collected data on all soccer players who played in the first male divisions of England, Germany, France, and Spain in the 2012-2013 season plus data on their interaction with all referees across their professional careers. The collected data contains multiple seasons for most players. They also collected ratings on the darkness of the skin tones from two independent raters that provided ratings based on available photos. The full data set is available on their project page at https://osf.io/gvm2z/. Silberzahn et al. (2018)  collected the data in June 2014. For the scope of this exercise, we prepared a subset of the data with the following variables<sup>2</sup>. 
 
 #### Player attributes
 
@@ -46,5 +46,5 @@ In the following section, we will use the data to fit a simple binomial logistic
 
 ```{=html}
 <hr />
-<footnote id="note2"><sup><a href="#note2">2</a></sup>We selected a subset of variables and removed player records with missing value. The details are available in the <a href="https://raw.githubusercontent.com/mjmoon/sta490-soccer/main/soccer.log" target="_blank">log file</a> and <a href="https://raw.githubusercontent.com/mjmoon/sta490-soccer/main/prepdata.R" target="_blank">the script</a>.</footnote>
+<footnote id="note2"><sup>2</sup>We selected a subset of variables and removed player records with missing value. The details are available in the <a href="https://raw.githubusercontent.com/mjmoon/sta490-soccer/main/soccer.log" target="_blank">log file</a> and <a href="https://raw.githubusercontent.com/mjmoon/sta490-soccer/main/prepdata.R" target="_blank">the script</a>.</footnote>
 ```
