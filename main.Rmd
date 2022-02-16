@@ -1,0 +1,42 @@
+---
+title: "Multiverse analysis: Do soccer referees give more red cards to dark-skinned players?"
+output: 
+  learnr::tutorial:
+    theme: default
+    allow_skip: true
+    css: css/styles.css
+bibliography: references.bib
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(ggplot2)
+remotes::install_github(
+  "mverseanalysis/mverse", ref = "release", upgrade = "always", quiet = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
+soccer <- read.csv("https://raw.githubusercontent.com/mjmoon/sta490-soccer/main/data/soccer.csv")
+```
+
+```{r child='00-introduction.Rmd'}
+```
+
+```{r child='01-overview.Rmd'}
+```
+
+```{r child='02-logistic-regression.Rmd'}
+```
+
+```{r child='03-multiverse-analysis.Rmd'}
+```
+
+```{r child='04-worksheet.Rmd'}
+```
+
+
+## References
+
+```{r}
+shiny::includeScript("www/print-to-pdf.js")
+```

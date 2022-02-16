@@ -1,0 +1,62 @@
+## Logistic regression analysis in R
+
+In order to test the hypothesis that soccer players with darker skin tone would receive more red cards, we will use a binomial logistic regression model. Our response variable is whether a player received a red card during a match and the independent variable of interest is the player's skin tone rating for each match. 
+
+### Skin tone rating
+
+We have two independent ratings for each player with a high correlation ($\rho=$ `r round(cor(soccer$rater1, soccer$rater2), 3)`). To keep the information from both independent raters, we will use the mean rating as our independent variable. You cane create the combined rating `skintone` as shown below.
+
+```{r glm-tut-iv, echo=TRUE}
+soccer["skintone"] <- (soccer["rater1"] + soccer["rater2"]) / 2
+```
+
+### Model fitting
+
+For this simple example, we will not consider any covariates. Thus, we can specify the model as below:
+
+$$\text{logit} E(Y_{i,j,k}) = \beta_0 + \beta_1 x_{i}, \text{ where}$$
+$Y_{i,j,k}$ is 1 if player $i$ receives a red card in game $k$ officiated by referee $j$ and $x_i$ is player $i$'s mean skin tone rating. 
+
+Note that the model specifies the response variable as an indicator variable per match involving each player-referee pair. However, each row of the data contains counts variables for _all_ games involving each player-referee pair. R's `glm` function automatically addresses translates the counts data when you specify the response variable in the following form: 
+
+```{r glm-tut-expr-reps, eval=FALSE, echo=TRUE}
+cbind(<count of successes>, <count of failures>)
+```
+
+In our case, we can specify the model formula as shown below since a player either receives a red card or doesn't per match.
+
+```{r glm-tut-formula, echo=TRUE}
+model <- formula(cbind(redCards, games - redCards) ~ skintone)
+```
+
+We then pass the model formula and the data to `glm` function. For binomial logistic regression, we specify the family as `binomial(link = "logit")`. 
+
+```{r glm-tut-fit, echo=TRUE}
+fit <- glm(model, family = binomial(link = "logit"), data = soccer)
+```
+
+### Result
+
+We can extract the resulting estimates of $\beta$'s as shown below.
+
+```{r glm-tut-expr-est, echo=TRUE}
+summary(fit)$coefficients
+```
+
+```{r glm-tut-res}
+reslog <- broom::tidy(fit, conf.int = TRUE)
+```
+
+Note that the estimate for the skin tone rating is in log-odd scale. We can compute the estimate and confidence interval in natural odd scale using `broom::tidy()`. `exponentiate = TRUE` converts the estimate to natural odd scale and `conf.int = TRUE, conf.level = .95` specifies the desired confidence interval.
+
+```{r glm-tut-expr-tidyest, echo=TRUE}
+broom::tidy(fit, exponentiate = TRUE, conf.int = TRUE, conf.level = .95)
+```
+
+```{r glm-tut-res-exp}
+res <- broom::tidy(fit, exponentiate = TRUE, conf.int = TRUE, conf.level = .95)
+```
+
+From the estimated odds above, we may conclude that soccer players with darker skin tone tend to receive more red cards based. The odd of a player with _very dark skin (mean skin tone rating = 1)_ getting a red card during a soccer match is `r round(res[[2,2]], 3)` (95% CI of [`r round(res[[2, 6]], 3)`, `r round(res[[2,7]], 3)`]) times higher compared to that of a player with _very light skin (mean skin tone rating = 0)_.
+
+In this simple demonstration, we omitted considerations for any covariates. In the following section, we demonstrate a multiverse analysis with an example for incorporating a covariate.
