@@ -1,6 +1,12 @@
 ---
-title: "Test tutorial"
-output: learnr::tutorial
+title: "Multiverse analysis: Do soccer referees give more red cards to dark-skinned players?"
+output: 
+  learnr::tutorial:
+    theme: default
+allow_skip: true
+css: css/styles.css
+lib_dir: libs
+bibliography: references.bib
 runtime: shiny_prerendered
 ---
 
