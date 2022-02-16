@@ -30,13 +30,13 @@ soccer <- read.csv("https://raw.githubusercontent.com/mjmoon/sta490-soccer/main/
 ```{r child='01-overview.Rmd'}
 ```
 
-```{r child='02-logistic-regression.Rmd'}
+```{r child='02-logistic-regression.Rmd', eval=FALSE}
 ```
 
 ```{r child='03-multiverse-analysis.Rmd', eval=FALSE}
 ```
 
-```{r child='04-worksheet.Rmd'}
+```{r child='04-worksheet.Rmd', eval=FALSE}
 ```
 
 
