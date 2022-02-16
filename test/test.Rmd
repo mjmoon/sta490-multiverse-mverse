@@ -24,6 +24,8 @@ knitr::opts_chunk$set(echo = FALSE)
 soccer <- read.csv("https://raw.githubusercontent.com/mjmoon/sta490-soccer/main/data/soccer.csv")
 ```
 
+```{r child='00-introduction.Rmd'}
+```
 
 ## References
 
