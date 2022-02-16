@@ -48,5 +48,5 @@ In the following section, we will use the data to fit a simple binomial logistic
 
 ```{=html}
 <hr />
-<footnote id="note2"><sup>2</sup>The details on how we prepared the subset are available in the <a href="https://raw.githubusercontent.com/mjmoon/sta490-soccer/main/soccer.log" target="_blank">log file</a> and <a href="https://raw.githubusercontent.com/mjmoon/sta490-soccer/main/prepdata.R" target="_blank">the script</a>.</footnote>
+<footnote id="note2"><sup>2</sup>The details on how we prepared the subset are available in <a href="https://raw.githubusercontent.com/mjmoon/sta490-soccer/main/soccer.log" target="_blank">this log file</a> and <a href="https://raw.githubusercontent.com/mjmoon/sta490-soccer/main/prepdata.R" target="_blank">this script</a>.</footnote>
 ```

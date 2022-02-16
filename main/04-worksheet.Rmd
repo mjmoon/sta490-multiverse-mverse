@@ -3,11 +3,11 @@
 In this section, you will expand the multiverse analysis from the previous section and conduct the analysis on your own. We are interested in answering the question on whether soccer referees give more red cards to dark-skinned players. Suppose you decided to answer the questions by investigating the logistic model as defined below:
 
 $$\text{logit} E(Y_{i,j,k}) = \beta X_i, \text{ where}$$
-$Y_{i,j,k}$ is 1 if player $i$ receives a red card in game $k$ officiated by referee $j$ and $X_i$ represents a vector containing player $i$'s mean skin tone rating and covariates plus the interaction term. Answer the questions below. For each question, click __Confirm__ so that you answer is properly printed in the submission. If you would like to edit your answer, you can click the __Confirm__ button again.
+$Y_{i,j,k}$ is 1 if player $i$ receives a red card in game $k$ officiated by referee $j$ and $X_i$ represents a vector containing player $i$'s mean skin tone rating and covariates plus the interaction term. 
 
-**At the end of the exercise, you will print the worksheet and submit a PDF file as described in *Submission instruction* at the bottom of this page.**
+> At the end of the exercise, you will print the worksheet and submit a PDF file as described in *Submission instruction* at the bottom of this page.
 
-### Question 1. Analysis
+### Multiverse setup
 
 Suppose you are interested in all combinations of the following options. 
 
@@ -23,7 +23,15 @@ C.  Player size<sup><a href="#note5">5</a></sup> (`height` or `weight`): Players
 __C1.__ using the height variable to represent a player's size; and  
 __C2.__ using the weight variable to represent a player's size.
 
-The required libraries have been loaded and the `skintone` variable has been defined as below.
+### Code your own multiverse
+
+Use the code area below to conduct the multiverse analysis that covers _all combinations of options for A, B, and C_ and answer the questions below. You can run your code by clicking the _Run code_ button on the right or with keyboard shortcuts (`Cmd + Enter` or `Ctrl + Enter` for selected lines; `Cmd + Shift + Enter` or `Ctrl + Shift + Enter` for the entire chunk). 
+
+> If you face problems running your code in the code area, download [this starter code script](www/starter.R) and conduct the analysis locally or on [JupyterHub](http://jupyter.utoronto.ca).
+
+> You may want to place log-odd ratio estimates, odd ratio estimates, and their confidence intervals in a single data frame and print to help answer the questions below.
+
+The required libraries have been loaded and the `skintone` variable has been defined as below for your use in the code area.
 
 ```{r worksheet-setup-disp, echo=TRUE, eval=FALSE}
 library(tidyverse)
@@ -37,11 +45,15 @@ soccer <- soccer %>%
   mutate(skintone = (rater1 + rater2) / 2)
 ```
 
-Use the code area below to conduct the multiverse analysis that covers _all combinations of options for A, B, and C_ and answer the questions below. You can run your code by clicking the _Run code_ button on the right or with keyboard shortcuts (`Cmd + Enter` or `Ctrl + Enter` for selected lines; `Cmd + Shift + Enter` or `Ctrl + Shift + Enter` for the entire chunk).
-
-```{r worksheet, exercise=TRUE, exercise.lines=25, exercise.setup="worksheet-setup", exercise.eval=TRUE}
-head(soccer) # the soccer data set has been loaded
+```{r worksheet, exercise=TRUE, exercise.lines=35, exercise.setup="worksheet-setup", exercise.eval=TRUE, paged.print=FALSE}
+################################################################
+# Conduct the multiverse analysis using `soccer` data set here #
+################################################################
 ```
+
+Answer the questions below based on the analysis result. For each question, click __Confirm__ so that you answer is properly printed in the submission. If you would like to resubmit your answer, you can edit your answer and click the __Confirm__ button again.
+
+### Question 1. Interpretating the multiverse analysis
 
 #### Question 1.1
 
@@ -238,20 +250,14 @@ output$q32ans <- shiny::renderTable(
 
 ### Submission instruction
 
-1.  Print this page to PDF and save the file as _**sta490-multiverse-analysis.pdf**_. You can click the button below to open up the printer dialogue for your browser. See [here](https://www.digitaltrends.com/computing/how-to-save-a-webpage-as-a-pdf/) if you are not familiar with printing a web page to a PDF file from a browser. 
-2.  Submit the pdf to Quercus. Please do **NOT** include your name in the file name or in the answers.
+1.  Print this page to PDF and save the file as _**sta490-multiverse-analysis.pdf**_. See [here](https://www.digitaltrends.com/computing/how-to-save-a-webpage-as-a-pdf/) if you are not familiar with printing a web page to a PDF file from a browser. 
+2.  Submit the pdf to Quercus. Please do **NOT** include your name in the file name (_**sta490-multiverse-analysis.pdf**_) or in the answers.
 
 #### Notes
 
 +  The PDF file will not include the code outputs or the input areas including code, text, and number input areas. Make sure to type in and confirm your answers for each question. 
 +  You will be graded based on completion of all questions and quality of discussions in Question 3. 
 +  Scores for Question 1 and Question 2 will be used for the purpose of the `mverse` R package evaluation only.
-
-```{r submitbutton}
-shiny::actionButton(
-  "printtopdf", "Print to PDF for submission", 
-  shiny::icon("print"), width = "100%")
-```
 
 
 ```{=html}

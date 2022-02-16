@@ -1,7 +1,10 @@
 @media print {
+     #section-multiverse-setup,
+     #section-code-your-own-multiverse,
     .form-control,
     .action-button,
     .topicsContainer, 
+    .tutorial-exercise-support,
     .tutorial-exercise-input,
     .tutorial-exercise-output-frame {
         display: none !important;
