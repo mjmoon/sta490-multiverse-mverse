@@ -5,7 +5,6 @@ output:
     theme: default
     allow_skip: true
     css: css/styles.css
-bibliography: references.bib
 runtime: shiny_prerendered
 ---
 
