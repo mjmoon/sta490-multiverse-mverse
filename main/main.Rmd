@@ -15,7 +15,10 @@ check <- lapply(
   packages,
   function(x) {
     if (!require(x, character.only = TRUE))
-      install.packages(x, dependencies = TRUE, quiet = TRUE, repos = "http://cran.us.r-project.org")
+      install.packages(
+        x, dependencies = TRUE, quiet = TRUE, 
+        INSTALL_opts = "--no-lock",
+        repos = "http://cran.us.r-project.org")
 })
 remotes::install_github(
   "mverseanalysis/mverse", ref = "release", 
