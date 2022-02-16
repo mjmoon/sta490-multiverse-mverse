@@ -13,6 +13,7 @@ runtime: shiny_prerendered
 library(learnr)
 library(tidyverse)
 library(ggplot2)
+install.packages("ggtext", quiet = TRUE)
 remotes::install_github(
   "mverseanalysis/mverse", ref = "release", upgrade = "always", quiet = TRUE)
 knitr::opts_chunk$set(echo = FALSE)
