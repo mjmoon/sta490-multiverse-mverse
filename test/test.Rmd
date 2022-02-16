@@ -6,7 +6,6 @@ output:
 allow_skip: true
 css: css/styles.css
 lib_dir: libs
-bibliography: references.bib
 runtime: shiny_prerendered
 ---
 
