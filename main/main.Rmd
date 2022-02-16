@@ -6,7 +6,6 @@ output:
 allow_skip: true
 css: css/styles.css
 lib_dir: libs
-bibliography: references.bib
 runtime: shiny_prerendered
 ---
 
@@ -42,6 +41,10 @@ soccer <- read.csv("https://raw.githubusercontent.com/mjmoon/sta490-soccer/main/
 
 
 ## References
+
+Silberzahn, R., Uhlmann, E. L., Martin, D. P., Anselmi, P., Aust, F., Awtrey, E., ... Nosek, B. A. 2018. “Many Analysts, One Data Set: Making Transparent How Variations in Analytic Choices Affect Results.” _Advances in Methods and Practices in Psychological Science_. 1 (3): 337–56. https://doi.org/10.1177/2515245917747646.
+
+Steegen, S., Tuerlinckx, F., Gelman, A., and Vanpaemel, W. 2016. “Increasing Transparency Through a Multiverse Analysis.” _Perspectives on Psychological Science_. 11 (5): 702–12. https://doi.org/10.1177/1745691616658637.
 
 ```{r}
 shiny::includeScript("www/print-to-pdf.js")

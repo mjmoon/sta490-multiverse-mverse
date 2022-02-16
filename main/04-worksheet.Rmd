@@ -136,7 +136,7 @@ output$q14ans <- shiny::renderTable(
 
 ### Question 2. Expanding the multiverse
 
-In Question 1, we limited our analysis to a subset of covariates and a generalized linear model. In @manyanalysts, the analyst teams considered a wider range of covariates and different types of models. In particular, we did not address the dependence structure due to repeated records of players and referees. On the other hand, the teams addressed the issue with various methods including mixed models, hierarchical Bayesian models, etc. 
+In Question 1, we limited our analysis to a subset of covariates and a generalized linear model. In Silberzahn et al. (2018), the analyst teams considered a wider range of covariates and different types of models. In particular, we did not address the dependence structure due to repeated records of players and referees. On the other hand, the teams addressed the issue with various methods including mixed models, hierarchical Bayesian models, etc. 
 
 
 #### Question 2.1

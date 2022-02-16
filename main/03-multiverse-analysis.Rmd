@@ -41,7 +41,7 @@ ggplot(tmp, aes(y = position, x =redCards / games, colour = position_group)) +
         strip.text.y.left = ggtext::element_markdown(angle = 0, size = 10))
 ```
 
-Note that the data set provides _typical position_ each player played _as of June 2014_ when @manyanalysts collected them. However, the red card and game counts may represent an accumulation over multiple years depending on the player's career. During these years, a player may have played multiple positions. This leads to a disconnect between the position information and the red cards on record. For example, a center back as of June 2014 may have received a red card while playing as a right full back. 
+Note that the data set provides _typical position_ each player played _as of June 2014_ when Silberzahn et al. (2018)  collected them. However, the red card and game counts may represent an accumulation over multiple years depending on the player's career. During these years, a player may have played multiple positions. This leads to a disconnect between the position information and the red cards on record. For example, a center back as of June 2014 may have received a red card while playing as a right full back. 
 
 To address the issue, one may consider grouping the positions assuming that most players do not switch between the groupings over their careers. Figure 1 shows a common grouping of the positions<sup><a href="#note3">3</a></sup>. We may also consider grouping all positions on the field and only keep _Goalkeeper_ as a separate position. We may also decide to not use the position information deeming the information as unreliable. All four options provide _defensible_ analysis paths.
 
