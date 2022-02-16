@@ -33,6 +33,9 @@ soccer <- read.csv("https://raw.githubusercontent.com/mjmoon/sta490-soccer/main/
 ```{r child='02-logistic-regression.Rmd'}
 ```
 
+```{r child='03-multiverse-analysis.Rmd'}
+```
+
 ## References
 
 Silberzahn, R., Uhlmann, E. L., Martin, D. P., Anselmi, P., Aust, F., Awtrey, E., ... Nosek, B. A. 2018. “Many Analysts, One Data Set: Making Transparent How Variations in Analytic Choices Affect Results.” _Advances in Methods and Practices in Psychological Science_. 1 (3): 337–56. https://doi.org/10.1177/2515245917747646.
