@@ -33,8 +33,6 @@ soccer <- soccer %>%
 ```
 
 ```{r worksheet-setup, message=FALSE, warning=FALSE}
-library(tidyverse)
-library(mverse)
 soccer <- soccer %>%
   mutate(skintone = (rater1 + rater2) / 2)
 ```

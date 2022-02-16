@@ -34,7 +34,7 @@ soccer <- read.csv("https://raw.githubusercontent.com/mjmoon/sta490-soccer/main/
 ```{r child='03-multiverse-analysis.Rmd'}
 ```
 
-```{r child='04-worksheet.Rmd'}
+```{r child='04-worksheet.Rmd', eval=FALSE}
 ```
 
 
