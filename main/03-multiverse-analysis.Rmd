@@ -56,7 +56,7 @@ We can argue that all four options below provide _defensible_ analysis paths.
 
 `mverse` is a package that helps define multiverse analyses. We will demonstrate a multiverse analysis across the four defensible analysis paths, or analysis universes. 
 
-First, we start by initiating an `mverse` object with the data set of interest. We will also use the tidyverse package for manipulation.
+First, we start by initiating an `mverse` object with the data set of interest. We will also use the `tidyverse` package for manipulation.
 
 ```{r mverse-tut-init, echo=TRUE, message=FALSE}
 library(tidyverse)
@@ -72,6 +72,7 @@ mv <- mverse(soccer)
 new_position <- mutate_branch(
   position, # use position as is
   forcats::fct_collapse(
+    # forcats::fct_collapse() is a convenient helper function for regrouping factors
     position, 
     Forward = c("Center Forward", "Right Winger", "Left Winger"), 
     Midfielder = c("Defensive Midfielder", "Attacking Midfielder", 
@@ -163,5 +164,5 @@ From the table above, we observe that the results are consistent in direction an
 ```{=html}
 <hr />
 <footnote id="note3"><sup>3</sup>We referred to <a href="https://yoursoccerhome.com/soccer-positions-a-complete-and-easy-to-understand-guide/" target="_blank">this guide</a> for the groupings.</footnote>
-<br /><footnote id="note4"><sup>4</sup><coce>filter_branch()</code> and <code>add_filter_branch()</code> are also available that multiplexes <code>filter()</code> in tidyverse.</footnote>
+<br /><footnote id="note4"><sup>4</sup><code>filter_branch()</code> and <code>add_filter_branch()</code> are also available that multiplexes <code>filter()</code> of tidyverse.</footnote>
 ```
