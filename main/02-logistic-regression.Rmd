@@ -6,7 +6,7 @@ In order to test the hypothesis that soccer players with darker skin tone would 
 
 We have two independent ratings for each player with a high correlation ($\rho=$ `r round(cor(soccer$rater1, soccer$rater2), 3)`). To keep the information from both independent raters, we will use the mean rating as our independent variable. You cane create the combined rating `skintone` as shown below.
 
-```{r glm-tut-iv, echo=TRUE}
+```{r glm-tut-iv, echo=TRUE, eval=FALSE}
 soccer["skintone"] <- (soccer["rater1"] + soccer["rater2"]) / 2
 ```
 
@@ -25,13 +25,13 @@ cbind(<count of successes>, <count of failures>)
 
 In our case, we can specify the model formula as shown below since a player either receives a red card or doesn't per match.
 
-```{r glm-tut-formula, echo=TRUE}
+```{r glm-tut-formula, echo=TRUE, eval=FALSE}
 model <- formula(cbind(redCards, games - redCards) ~ skintone)
 ```
 
 We then pass the model formula and the data to `glm` function. For binomial logistic regression, we specify the family as `binomial(link = "logit")`. 
 
-```{r glm-tut-fit, echo=TRUE}
+```{r glm-tut-fit, echo=TRUE, eval=FALSE}
 fit <- glm(model, family = binomial(link = "logit"), data = soccer)
 ```
 
@@ -44,6 +44,7 @@ summary(fit)$coef
 ```
 
 ```{r glm-tut-expr-est-disp}
+load("02-logistic-regression.RData")
 summary(fit)$coef %>% as.data.frame()
 ```
 
@@ -54,7 +55,6 @@ broom::tidy(fit, exponentiate = TRUE, conf.int = TRUE, conf.level = .95)
 ```
 
 ```{r glm-tut-res-exp}
-res <- broom::tidy(fit, exponentiate = TRUE, conf.int = TRUE, conf.level = .95)
 res
 ```
 

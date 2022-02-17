@@ -31,7 +31,7 @@ ggplot(tmp, aes(y = position, x =redCards / games, colour = position_group)) +
              labeller = as_labeller(~ paste0('<span style="color:',
              RColorBrewer::brewer.pal(4, "Set2")[1:4], ';">',.x, '</span>'))) +
   labs(y = NULL, x = "Proportion of red card received per match", 
-       caption = stringr::str_wrap("Figure 1. The violin plots display the distributions of each player's proportion of red cards received in a game and the squares indicate the median value for each position. They suggest that the likelihood of receiving a red card in a soccer match may vary by position.", width = 90)) +
+       caption = stringr::str_wrap("Figure 1. The violins display the distributions of each player's proportion of games where they received a red card and the squares indicate the median value for each position. They suggest that the likelihood of receiving a red card in a soccer match may vary by position.", width = 95)) +
   theme(axis.text.y = element_blank(),
         axis.title.x.top = element_text(color = "#555555", size = 8),
         axis.text.x.top = element_text(color = "#555555", size = 8),
@@ -58,17 +58,17 @@ We can argue that all four options below provide _defensible_ analysis paths.
 
 First, we start by initiating an `mverse` object with the data set of interest. We will also use the `tidyverse` package for manipulation.
 
-```{r mverse-tut-init, echo=TRUE, message=FALSE}
+```{r mverse-tut-init, echo=TRUE, message=FALSE, eval=FALSE}
 library(tidyverse)
 library(mverse)
-mv <- mverse(soccer) 
+mv <- mverse(soccer)
 ```
 
 ### Specifying options at decision points
 
 `mverse` specifies different options at each decision point with _branches_. For example, we use `mutate_branch()` to define the options for defining _position_. We can provide each option as an R expression as if we were creating a new column using `mutate()` in tidyverse separated by a comma.
 
-```{r mverse-tut-branch, echo=TRUE}
+```{r mverse-tut-branch, echo=TRUE, eval=FALSE}
 new_position <- mutate_branch(
   position, # use position as is
   forcats::fct_collapse(
@@ -85,7 +85,7 @@ new_position <- mutate_branch(
 
 To specify the model equation, we use `formula_branch()`. We can provide the model equations as if you were writing the model formula in base R separated by a comma. We need to refer to the name of the branch when including a branched variable. i.e., `new_position`.
 
-```{r mverse-tut-formula, echo=TRUE}
+```{r mverse-tut-formula, echo=TRUE, eval=FALSE}
 model <- formula_branch(
   cbind(redCards, games - redCards) ~ skintone, # do not use position information
   cbind(redCards, games - redCards) ~ skintone + new_position # include position variable
@@ -94,7 +94,7 @@ model <- formula_branch(
 
 To fit the model, we need to add the defined branches to the `mverse` object with data. We will also add a `family_branch()` to specify the underlying distribution of the model. Although we are not creating a branch with multiple options `mverse` requires `family_branch()` to fit logistic regression models. We can add the branches by piping the object through `add_***_branch()` functions<sup>4</sup>.
 
-```{r mverse-tut-add-branches, echo=TRUE}
+```{r mverse-tut-add-branches, echo=TRUE, eval=FALSE}
 logit_reg <- family_branch(binomial(link = "logit"))
 mv <- mv %>%
   add_mutate_branch(new_position) %>%
@@ -104,7 +104,7 @@ mv <- mv %>%
 
 Note that each branch in `mverse` represents a decision point and by default, all options in each branch are multiplexed throughout all options in other branches. That is, the three options for `position` variable in `mv` are applied for both options of including and excluding the variable in `formula`. To avoid the unnecessary duplicate universes, we can using `branch_condition()` to condition the option without `position` in model equation with one of the options for `position`. When conditioning options, we need to provide the R expressions used to defined the options as shown below.
 
-```{r mverse-tut-branch-condition, echo=TRUE}
+```{r mverse-tut-branch-condition, echo=TRUE, eval=FALSE}
 condition_position <- branch_condition(
   cbind(redCards, games - redCards) ~ skintone, # formula with no position option
   position # position as is option 
@@ -113,7 +113,7 @@ condition_position <- branch_condition(
 
 We then add the branch condition to `mv` option just as we did with branch definitions.
 
-```{r mverse-tut-add-condition, echo=TRUE}
+```{r mverse-tut-add-condition, echo=TRUE, eval=FALSE}
 mv <- add_branch_condition(mv, condition_position)
 ```
 
@@ -122,44 +122,44 @@ mv <- add_branch_condition(mv, condition_position)
 
 To allow fitting logistic regression models, `mverse` provides `glm_mverse()` which calls `glm()` across the multiverse as defined by the branches. The function executes `glm()` for each unique analysis paths specified by the branches and branch conditions.
 
-```{r mverse-tut-glm, echo=TRUE}
-fit <- glm_mverse(mv)
+```{r mverse-tut-glm, echo=TRUE, eval=FALSE}
+multiverse_fit <- glm_mverse(mv)
 ```
 
 ### Results
 
 We can use `summary()` function for the multiverse GLM object to extract the estimated coefficients and the corresponding confidence intervals. The output is a tibble that contains estimates for all coefficients across all analysis paths. We can then select the subset that contains estimates for the variable interest, `skintone`. The resulting table consists of 4 rows each representing an analysis path we defined. 
 
-> **Hint:** Turning off the confidence interval with `conf.int = FALSE` can help speed up the process for `glm`.
+> **Technical note:** `summary()` for fitted `mverse` object calls `broom::tidy()` for each universe in the background. While you can extract the confidence intervals directly from `broom::tidy()` with `conf.int = TRUE`, it can be considerably slow for multiple `glm()` objects. Using the estiamted standard error for computing the confidence interval gives a slightly different but still reasonable results.
 
-```{r mverse-tut-glm-summary, echo=TRUE}
-est <- summary(fit, conf.int = FALSE) 
-filter(est, term == 'skintone')
+```{r mverse-tut-glm-summary, echo=TRUE, eval=FALSE}
+summary(multiverse_fit, conf.int = FALSE) %>%
+  filter(term == 'skintone')
 ```
 
-The estimates are in log-odd scale. We can compute the estimates and the confidence intervals in odd scale as below.
+```{r mverse-tut-glm-summary-disp}
+load("03-multiverse-analysis.RData")
+multiverse_est
+```
 
-```{r mverse-tut-glm-exp, echo=TRUE}
-filter(est, term == 'skintone') %>% 
+The estimates are in log-odd scale. We can compute the estimates and the confidence intervals in odd scale by exponentiating the estimate
+
+```{r mverse-tut-glm-exp, echo=TRUE, eval=FALSE}
+summary(multiverse_fit, conf.int = FALSE) %>%
+  filter(term == 'skintone') %>% 
   mutate(
     conf.low = exp(estimate + qnorm(.025) * std.error),
     conf.high = exp(estimate + qnorm(.975) * std.error),
     estimate = exp(estimate)
   ) %>%
-  select(universe, estimate, conf.low, conf.high, new_position_branch, model_branch)
+  select(universe, estimate, conf.low, conf.high, new_position_branch, model_branch) # rearrange columns for display
 ```
 
 ```{r mverse-tut-glm-res}
-res <- filter(est, term == 'skintone') %>% 
-  mutate(
-    conf.low = exp(estimate + qnorm(.025) * std.error),
-    conf.high = exp(estimate + qnorm(.975) * std.error),
-    estimate = exp(estimate)
-  ) %>%
-  select(universe, estimate, conf.low, conf.high, new_position_branch, model_branch)
+multiverse_res
 ```
 
-From the table above, we observe that the results are consistent in direction and statistical significance at 95% confidence level across the multiverse of analysis paths. The results indicate that players with very dark skin tones suffer approximately `r sprintf("%.1f%%", min(res$estimate) * 100 - 100)`~`r sprintf("%.1f%%", max(res$estimate) * 100 - 100)` (Odd ratio 95% CIs ranging approximately within [`r sprintf("%.2f", min(res$conf.low))`, `r sprintf("%.2f", max(res$conf.high))`]) higher odds of getting a red card during match compared to their colleagues with very light skin tones. 
+From the table above, we observe that the results are consistent in direction and statistical significance at 95% confidence level across the multiverse of analysis paths. The results indicate that players with very dark skin tones suffer approximately `r sprintf("%.1f%%", min(multiverse_res$estimate) * 100 - 100)`~`r sprintf("%.1f%%", max(multiverse_res$estimate) * 100 - 100)` (Odd ratio 95% CIs ranging approximately within [`r sprintf("%.2f", min(multiverse_res$conf.low))`, `r sprintf("%.2f", max(multiverse_res$conf.high))`]) higher odds of getting a red card during match compared to their colleagues with very light skin tones. 
 
 ```{=html}
 <hr />

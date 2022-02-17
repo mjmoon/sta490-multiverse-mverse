@@ -42,6 +42,10 @@ label {
   font-weight: 400 !important;
 }
 
+blockquote {
+  font-size: 14px !important;
+}
+
 .footnote{
   font-family: Bitter !important;
   font-weight: 300 !important;
