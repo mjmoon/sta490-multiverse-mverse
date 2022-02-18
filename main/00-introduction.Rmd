@@ -3,9 +3,9 @@
 
 Data analysis for any scientific research is an iterative, multi-stage process. The statistical analysis that are ultimately reported in a published paper, or to clients, are usually one of many possible, defensible analyses. For example, Silberzahn et al. (2018) crowdsourced analysts to conduct a study to answer the question whether soccer referees give more red cards to dark-skinned players and 29 teams of analysts rationalized a wide range of methods for the same research question<sup>1</sup>. 
 
-In this exercise, you will perform a multiverse analysis (Steegen et al. 2016) where we investigate and report results from a set of defensible analytic choices. Specifically, you will explore a set of analytic decisions on covariates to fit a binomial logistic regression model. 
+In this exercise, you will perform a multiverse analysis (Steegen et al. 2016) where we investigate and report results from a set of defensible analytic choices. Specifically, you will explore a set of analytic decisions on covariates to fit a logistic regression model. 
 
-In the following section, we provide a brief overview of the research context and the data set, followed by a demonstration in R for fitting a simple binomial regression model. We then provide a short example of a multiverse analysis in R. You will then proceed to the exercise page to expand the multiverse analysis. Details on the exercise submission for the STA490 class is available on the page that follows. You can check the last page for the list of references.
+In the following section, we provide a brief overview of the research context and the data set, followed by a demonstration in R for fitting a logistic regression model. We then provide a short example of a multiverse analysis in R. You will then proceed to the worksheet to expand the multiverse analysis and submit it on Quercus. Details on the exercise submission for the STA490 class is available on the same page. You can check the last page for the list of references.
 
 ```{=html}
 <hr />
