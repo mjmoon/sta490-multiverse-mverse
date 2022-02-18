@@ -2,43 +2,8 @@
 
 Suppose you want to taken each player's position information into account in building the model. As seen in Figure 1, defensive players were more prone to receiving a red card in a match. Controlling for a player's position thus seems like a reasonable choice.
 
-```{r multiverse-tut-position-plot, warning=FALSE}
-tmp <- soccer %>%
-  mutate(position = forcats::fct_infreq(position)) %>%
-  mutate(position = factor(position, rev(levels(position)))) %>%
-  mutate(position_group = forcats::fct_collapse(position,
-    Forward = c("Center Forward", "Right Winger", "Left Winger"),
-    Midfielder = c("Defensive Midfielder", "Attacking Midfielder", 
-                   "Right Midfielder", "Center Midfielder", "Left Midfielder"),
-    Defender = c("Center Back", "Right Fullback", "Left Fullback"),
-    Goalkeeper = c("Goalkeeper")
-  )) %>%
-  group_by(playerShort, position, position_group) %>%
-  summarise(redCards = sum(redCards), games = sum(games), .groups = "keep")
-tmp_group <- tmp %>%
-  group_by(position, position_group) %>%
-  summarise(medianp = median(redCards / games), n = n(), .groups = "keep")
-ggplot(tmp, aes(y = position, x =redCards / games, colour = position_group)) +
-  theme_minimal() +
-  geom_violin(alpha = 0.25, show.legend = FALSE) +
-  geom_point(aes(x = medianp), data = tmp_group, size = 2, shape = 15, show.legend = FALSE) +
-  geom_text(aes(x = 0.04, label = paste0(position, " (n=", format(n, big.mark = ",") , ")")),
-    size = 3, hjust = 1, vjust = 0.5, nudge_y = 0, nudge_x =- 0.001, show.legend = FALSE,
-    data = tmp_group) +
-  scale_x_continuous(position = "top", limits = c(0, 0.04)) +
-  scale_colour_brewer(palette = "Set2") +
-  facet_grid("position_group", scales = "free_y", space = "free_y", switch = "y",
-             labeller = as_labeller(~ paste0('<span style="color:',
-             RColorBrewer::brewer.pal(4, "Set2")[1:4], ';">',.x, '</span>'))) +
-  labs(y = NULL, x = "Proportion of red card received per match", 
-       caption = stringr::str_wrap("Figure 1. The violins display the distributions of each player's proportion of games where they received a red card and the squares indicate the median value for each position. They suggest that the likelihood of receiving a red card in a soccer match may vary by position.", width = 95)) +
-  theme(axis.text.y = element_blank(),
-        axis.title.x.top = element_text(color = "#555555", size = 8),
-        axis.text.x.top = element_text(color = "#555555", size = 8),
-        panel.grid.major.y = element_blank(),
-        plot.caption = element_text(color = "#555555", size = 10),
-        plot.caption.position = "plot",
-        strip.text.y.left = ggtext::element_markdown(angle = 0, size = 10))
+```{r multiverse-tut-position-plot, out.width="80%"}
+knitr::include_graphics("www/positions.png")
 ```
 
 Note that the data set provides _typical position_ each player played _as of June 2014_ when Silberzahn et al. (2018) collected them. However, the red card and game counts may represent an accumulation over multiple years depending on the player's career. During these years, a player may have played multiple positions. This leads to a disconnect between the position information and the red cards on record. For example, a center back as of June 2014 may have received a red card while playing as a right full back. 
