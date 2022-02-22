@@ -129,7 +129,7 @@ output$q13ans <- shiny::renderText(paste0(
 #### Question 1.4
 
 ```{r q14}
-shiny::textAreaInput("q14", "Compute the estimates and 95% confidence intervals in natural odd scale for the coefficient of the mean skin tone rating. Provide an interpretation of the results including a) whether the results show a statistically significant result, b) if it does, the estimated odd ratio(s) and its confidence interval(s), and c) how confident you are about the robustness of the result.",
+shiny::textAreaInput("q14", "Compute the estimates and 95% confidence intervals in natural odd scale for the coefficient of the mean skin tone rating. In one or two paragraphs, provide an interpretation of the results including a) whether the results show a statistically significant result, b) if it does, the estimated odd ratio(s) and its confidence interval(s), and c) how confident you are about the robustness of the result.",
                      placeholder = "(Write your answer here.)",
                      width = "100%", height="300px", resize = "vertical")
 shiny::actionButton("q14btn", "Confirm")
@@ -154,7 +154,7 @@ In Question 1, we limited our analysis to a subset of covariates and a generaliz
 #### Question 2.1
 
 ```{r q21}
-shiny::textAreaInput("q21universe", "Identify at least one alternative analysis that models the dependence structure of players and/or referees. For each analysis path identified, clealry specify the additional variables used and the method considered. Answer the",
+shiny::textAreaInput("q21universe", "Identify at least one alternative analysis that models the dependence structure of players and/or referees. For each analysis path identified, clealry specify the additional variables used and the method considered.",
                      placeholder = "(Write your answer here and click 'Add' to add your answer to the list. Click 'Reset' to reset the list of your answers.)",
                      width = "100%", height="150px", resize = "vertical")
 ```
